@@ -1,34 +1,16 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react';
+import {BrowserRouter,Route,Routes} from 'react-router'
+import Home from './Pages/Home'
+import Cart from './Pages/Cart'
 function App(){
 
-  const [state,setState]=useState([])
-
- async function display(){
-  const apidata=await axios.get('https://jsonplaceholder.typicode.com/users')
-  setState(apidata.data)
-
- }
-
- useEffect(()=>{
-display()
- },[])
-
-
-console.log(state);
-
-
-
   return(
-    <>
-{state.map((li)=>(
-  <>
-  <h1>{li.name}</h1>
-  <h1>{li.username}</h1>
-  <h1>city name :{li.address.city}</h1>
-  </>
-))}
-    </>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Home />}/>
+      <Route path='/cart/:name' element={<Cart />}/>
+    </Routes>
+
+    </BrowserRouter>
   )
 }
 

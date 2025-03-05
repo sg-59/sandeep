@@ -1,29 +1,34 @@
-import React, { useReducer, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
+import { Appcontext } from '../Createcontext'
 
 function Study() {
 
-    const initialValue={
-        value:0,
-        color:""
-    }
+    const [state,setState]=useState(0)
 
-    function display(state,action){
-        console.log("action values...........",action);
-        
-        switch(action.type){
-            case "inc":
-                return {value:state.value+1,color:action.clr}
+   const a=useContext(Appcontext)
+
+
+   console.log("usecontext values",a);
+   
+    useEffect(()=>{
+        var i=0
+    const intervel= setInterval(()=>{
+console.log(i++);
+
+        },1000)
+
+        return ()=>{
+            console.log("clearup function");
+            clearInterval(intervel)
         }
- }
 
-   const [state,dispatch]=useReducer(display,initialValue)
+    },[state])
+
 
   return (
     <>
-    <div style={{display:'flex',alignItems:"center",justifyContent:"center",height:"500px",width:"100%",flexDirection:"column",color:state.color}}>
-        <h1>state value :{state.value}</h1>
-        <button onClick={()=>dispatch({type:"inc",clr:"green"})}>Increment</button>
-        </div>
+<h1>{a.name}{state}</h1>
+<button onClick={()=>setState(state+1)}>Click</button>
      </>
   )
 }

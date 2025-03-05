@@ -4,6 +4,7 @@ import Navabar from '../Component/Navabar'
 
 import { categoriess } from './Api'
 import { Link } from 'react-router'
+import { useSelector } from 'react-redux'
 
 const Main=styled.div`
   width: 100%;
@@ -35,6 +36,11 @@ const Image=styled.img`
 `
 
 function Home() {
+
+  const reduxData=useSelector((state)=>state.userInfo.userData)
+
+  console.log("final answer in redux data",reduxData);
+  
 
   const [apiData,setApiData]=useState([])
 const [loading,setLoading]=useState(false)
